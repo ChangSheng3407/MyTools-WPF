@@ -1,0 +1,16 @@
+﻿<Border x:Class="MyTools.UserControl.Tools.JsonExcel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyTools.UserControl.Tools"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="100">
+    <hc:TransitioningContentControl>
+        <hc:UniformSpacingPanel Spacing="50" Orientation="Vertical" VerticalAlignment="Center">
+            <Button MaxWidth="200" Height="50"  Style="{StaticResource ButtonPrimary}" Click="Json2Excel">Json To Excel</Button>
+            <Button MaxWidth="200" Height="50"  Style="{StaticResource ButtonPrimary}" Click="Excel2Json">Excel To Json</Button>
+        </hc:UniformSpacingPanel>
+    </hc:TransitioningContentControl>
+</Border>
