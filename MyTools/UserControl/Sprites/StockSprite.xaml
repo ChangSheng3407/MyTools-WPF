@@ -1,0 +1,85 @@
+﻿<hc:SimplePanel  xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="MyTools.UserControl.Sprites.StockSprite"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyTools.UserControl.Tools" xmlns:sprites="clr-namespace:MyTools.UserControl.Sprites"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             d:DataContext="{d:DesignInstance Type=sprites:StockSpriteViewModel}"
+             mc:Ignorable="d" Opacity="0.5"
+             MinWidth="250"
+             Cursor="Hand">
+    <Border x:Name="Border" Background="AliceBlue" CornerRadius="20" BorderBrush="Black" BorderThickness="1"/>
+    <DockPanel Margin="10">
+        <hc:SimplePanel DockPanel.Dock="Top">
+            <Button HorizontalAlignment="Left" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource HomeGeometry}" Command="hc:ControlCommands.PushMainWindow2Top" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+            <Button HorizontalAlignment="Right" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource RemoveGeometry}" Command="{Binding Close}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+        </hc:SimplePanel>
+        <DockPanel Visibility="{Binding IsMouseOver,RelativeSource={RelativeSource AncestorType=hc:SimplePanel},Converter={StaticResource Boolean2VisibilityConverter}}">
+            <Slider DockPanel.Dock="Top" Margin="5" Value="{Binding Opacity,RelativeSource={RelativeSource AncestorType=hc:SimplePanel},Mode=TwoWay}" Maximum="1" Minimum="0.3"></Slider>
+            <hc:ElementGroup DockPanel.Dock="Top" Margin="5">
+                <hc:ElementGroup.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </hc:ElementGroup.ItemsPanel>
+                <TextBox hc:InfoElement.TitleWidth="55" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="股票代码" Style="{StaticResource TextBoxExtend}" Text="{Binding StockCode}"/>
+                <Button Grid.Column="1" hc:IconElement.Geometry="{StaticResource AddGeometry}" Command="{Binding AddStockInfo}"/>
+            </hc:ElementGroup>
+            <hc:ElementGroup DockPanel.Dock="Top" Margin="5" Orientation="Horizontal" Layout="Stack">
+                <hc:ElementGroup.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </hc:ElementGroup.ItemsPanel>
+                <hc:ComboBox ItemsSource="{Binding StockInfos}" DisplayMemberPath="StockName" SelectedValuePath="StockCode" SelectedItem="{Binding SelectedStockInfo}" SelectedIndex="0"/>
+                <Button Grid.Column="1" hc:IconElement.Geometry="{StaticResource DeleteGeometry}" Command="{Binding DeleteStockInfo}"></Button>
+            </hc:ElementGroup>
+            <Border BorderThickness="1" BorderBrush="#1e80ff" CornerRadius="20" Padding="5" Margin="5">
+                <TabControl DockPanel.Dock="Top" SelectedIndex="1" Style="{StaticResource TabControlSliding}" BorderThickness="0">
+                    <TabItem Header="默认">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <hc:UniformSpacingPanel Spacing="5" HorizontalAlignment="Center" Margin="10">
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.StockCode,StringFormat={}股票代码：{0}}"/>
+                                <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkPrimaryBrush}" Orientation="Vertical" MaxHeight="16"/>
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.StockName,StringFormat={}股票名称：{0}}"/>
+                            </hc:UniformSpacingPanel>
+                            <hc:UniformSpacingPanel Grid.Row="1" Spacing="5" HorizontalAlignment="Center" Margin="10">
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.CurrentPrice,StringFormat={}当前价格：{0}}"/>
+                                <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkPrimaryBrush}" Orientation="Vertical" MaxHeight="16"/>
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.ChangePercentageValue,StringFormat={}涨跌值：{0}}"/>
+                                <hc:Divider LineStrokeThickness="2" LineStroke="{DynamicResource DarkPrimaryBrush}" Orientation="Vertical" MaxHeight="16"/>
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.ChangePercentage,StringFormat={}涨跌幅：{0}%}"/>
+                            </hc:UniformSpacingPanel>
+                            <lvc:CartesianChart Grid.Row="2" Width="500" Height="260" Series="{Binding Series}" ZoomMode="X" XAxes="{Binding XAxes}"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="迷你">
+                        <hc:SimplePanel>
+                            <hc:UniformSpacingPanel Spacing="5" Orientation="Vertical"  HorizontalAlignment="Left" Margin="10">
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.CurrentPrice,StringFormat={}当前价格：{0}}" Style="{StaticResource TextBlockDefaultPrimary}"/>
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.ChangePercentageValue,StringFormat={}涨跌值：{0}}" Style="{StaticResource TextBlockDefaultPrimary}"/>
+                                <TextBlock HorizontalAlignment="Stretch" Width="auto" Text="{Binding SelectedStockInfo.ChangePercentage,StringFormat={}涨跌幅：{0}%}" Style="{StaticResource TextBlockDefaultPrimary}"/>
+                            </hc:UniformSpacingPanel>
+                        </hc:SimplePanel>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </DockPanel>
+    </DockPanel>
+</hc:SimplePanel>

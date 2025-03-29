@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>E:\YK\MyTools\MyTools\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="UserControl\FormControl\TimeTaskForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\FormControl\ToDoForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\HomePageControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\MiniControl\ImgMiniControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\Tools\Base64Pic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\BaseUserTemplete\BaseUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\Sprites\StockSprite.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\Tools\DockerTool.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\Tools\TimeTask.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\Tools\ToDoList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ConverterDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="GeometryDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ImageDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\FormControl\TimeTaskForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\FormControl\ToDoForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\HomePageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\MiniControl\ImgMiniControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\Tools\Base64Pic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\BaseUserTemplete\BaseUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\Sprites\StockSprite.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\Tools\TimeTask.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\Tools\ToDoList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

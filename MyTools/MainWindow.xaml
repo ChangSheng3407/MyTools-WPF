@@ -1,0 +1,67 @@
+﻿<hc:Window  
+        x:Class="MyTools.MainWindow"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:UserControl="clr-namespace:MyTools.UserControl"
+        xmlns:viewmodel="clr-namespace:MyTools.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        mc:Ignorable="d"
+        hc:Empty.ShowEmpty="False"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowWin10}"
+        Title="MainWindow" Height="700" Width="900">
+    <hc:Window.Background>
+        <ImageBrush ImageSource="{Binding BackgroundPath}"></ImageBrush>
+    </hc:Window.Background>
+    <hc:SimplePanel>
+        <hc:NotifyIcon Text="MyTools" Visibility="Visible" Icon="/Resources/Icon.ico">
+            <hc:NotifyIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="hc:ControlCommands.PushMainWindow2Top" Header="打开主界面"/>
+                    <MenuItem Command="hc:ControlCommands.ShutdownApp" Header="退出"/>
+                </ContextMenu>
+            </hc:NotifyIcon.ContextMenu>
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="Click">
+                    <hc:EventToCommand Command="hc:ControlCommands.PushMainWindow2Top"/>
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:NotifyIcon>
+
+        <DockPanel>
+            <Border Height="40" Background="AliceBlue" Opacity="0.8" DockPanel.Dock="Top">
+                <hc:UniformSpacingPanel Spacing="10" Margin="16,0">
+                    <Button hc:IconElement.Geometry="{StaticResource Delete}" Content="清空通知" Command="{Binding ClearNotificationCommand}"/>
+                    <Button hc:IconElement.Geometry="{StaticResource SelectBackground}" Command="{Binding ChangeBackgroundCommand}">设置背景图片</Button>
+                    <Button hc:IconElement.Geometry="{StaticResource Stock}" Command="{Binding ShowStockSprite}">天地盯盘</Button>
+                </hc:UniformSpacingPanel>
+            </Border>
+            <Border Height="40" Background="AliceBlue" Opacity="0.8" DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="16,0">
+                    <TextBlock Text="外网IP:" Style="{StaticResource TextBlockDefault}" />
+                    <TextBlock Text="{Binding PublicIPAddress}" Style="{StaticResource TextBlockDefault}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CopyToClipboard}" CommandParameter="{Binding PublicIPAddress}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <hc:Divider LineStrokeThickness="2" Orientation="Vertical" MaxHeight="16"/>
+                    <TextBlock Text="内网IP:" Style="{StaticResource TextBlockDefault}" />
+                    <TextBlock Text="{Binding PrivateIPAddress}" Style="{StaticResource TextBlockDefault}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CopyToClipboard}" CommandParameter="{Binding PrivateIPAddress}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <hc:Divider LineStrokeThickness="2" Orientation="Vertical" MaxHeight="16"/>
+                    <Button Style="{StaticResource ButtonIconCircular}" hc:IconElement.Geometry="{StaticResource RotateLeftGeometry}" Cursor="Hand" Command="{Binding RefreshIPAddressCommand}"/>
+                </StackPanel>
+            </Border>
+            <DockPanel Margin="8">
+                <UserControl:LeftMainContent DockPanel.Dock="Left" Margin="0,0,8,0" DataContext="{Binding}"/>
+                <UserControl:RightMainContent Margin="8,0,0,0" DataContext="{Binding}"/>
+            </DockPanel>
+        </DockPanel>
+    </hc:SimplePanel>
+</hc:Window>

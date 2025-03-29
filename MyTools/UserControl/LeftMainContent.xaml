@@ -1,0 +1,53 @@
+﻿<Border x:Class="MyTools.UserControl.LeftMainContent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:MyTools.UserControl"
+        xmlns:localVM="clr-namespace:MyTools.ViewModel"
+        mc:Ignorable="d" 
+        Effect="{StaticResource EffectShadow4}"
+        d:DataContext="{d:DesignInstance Type=localVM:MainViewModel}"
+        Opacity="0.9">
+    <hc:SimplePanel>
+        <Border ClipToBounds="True" CornerRadius="10" Style="{StaticResource BorderClip}" Background="{StaticResource RegionBrush}">
+            <TabControl Margin="5" Grid.Row="1" SelectedIndex="1" Style="{StaticResource TabControlInLine}" Background="Transparent" ItemsSource="{Binding TabItems}" BorderThickness="0">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <hc:ElementGroup>
+                            <Image Source="{StaticResource 柯基}" Width="22" Margin="5,0"></Image>
+                            <TextBlock Text="{Binding Key}" VerticalAlignment="Center"></TextBlock>
+                        </hc:ElementGroup>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <!--<hc:SearchBar Margin="3"/>-->
+                            <ListBox ItemsSource="{Binding Value}" MinWidth="100" SelectionChanged="ListBox_SelectionChanged" Margin="0,5">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemBaseStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#b0c7f7"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <hc:ElementGroup Orientation="Horizontal" Layout="Stack" Padding="5,10">
+                                            <Image Source="{Binding ImageSource}" Width="32" Margin="5,0"></Image>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
+                                        </hc:ElementGroup>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Border>
+    </hc:SimplePanel>
+</Border>
