@@ -1,0 +1,41 @@
+﻿<Border x:Class="MyTools.UserControl.FormControl.TimeTaskForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyTools.UserControl.FormControl"
+             mc:Ignorable="d" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             Background="White"
+             CornerRadius="25"
+             d:DataContext="{d:DesignInstance Type=local:TimeTaskFormViewModel}"
+             d:DesignHeight="450" d:DesignWidth="450">
+    <hc:SimpleStackPanel DataContext="{Binding}" Margin="30">
+
+        <TextBlock Text="{Binding Title}" TextAlignment="Center" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
+
+        <hc:UniformSpacingPanel Spacing="8" Orientation="Vertical" Margin="0,5" DataContext="{Binding Config}">
+
+            <hc:TextBox Width="380" Text="{Binding JobName}" hc:InfoElement.TitleWidth="90" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Necessary="True" hc:InfoElement.Title="任务名"/>
+
+            <ComboBox Width="380" SelectedValue="{Binding Enable}" ItemsSource="{Binding DataContext.Enable,RelativeSource={RelativeSource AncestorType=hc:SimpleStackPanel}}" DisplayMemberPath="Key" SelectedValuePath="Value" hc:InfoElement.TitleWidth="90" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="状态" Style="{StaticResource ComboBoxExtend}"/>
+
+            <hc:TextBox Width="380" Text="{Binding ExpString}" hc:InfoElement.TitleWidth="90" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Necessary="True" hc:InfoElement.Title="Cron表达式"/>
+
+            <hc:Shield Subject="Click" Status="在线Cron表达式生成器" Color="#efa002" Command="hc:ControlCommands.OpenLink" CommandParameter="https://www.yisu.com/t/cron.html" Cursor="Hand"/>
+
+            <ComboBox Width="380" SelectedItem="{Binding ExecuteType}" ItemsSource="{Binding DataContext.ExecuteTypes,RelativeSource={RelativeSource AncestorType=hc:SimpleStackPanel}}" hc:InfoElement.TitleWidth="90" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="执行类型" Style="{StaticResource ComboBoxExtend}"/>
+
+            <TextBlock HorizontalAlignment="Left" FontSize="10" Text="CMD类型填入命令行脚本 HTTP类型填入Curl脚本 REMIND类型填入提示内容" Style="{StaticResource TextBlockDefaultDanger}"/>
+
+            <hc:TextBox Width="380" Padding="5" MaxHeight="150" MinHeight="80" hc:InfoElement.TitleWidth="90" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="执行脚本" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ExecuteContent}" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+        </hc:UniformSpacingPanel>
+
+        <hc:UniformSpacingPanel Margin="10,5" HorizontalAlignment="Center" Spacing="10">
+            <Button Width="100" Style="{StaticResource ButtonPrimary}" Command="{Binding Save}">确认</Button>
+            <Button Style="{StaticResource ButtonWarning}" Command="{Binding CheckExpString}">校验表达式</Button>
+            <Button Width="100" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonDashed}">取消</Button>
+        </hc:UniformSpacingPanel>
+    </hc:SimpleStackPanel>
+</Border>

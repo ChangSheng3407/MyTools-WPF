@@ -1,0 +1,25 @@
+﻿<Border x:Class="MyTools.UserControl.HomePageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyTools.UserControl" xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:viewmodel="clr-namespace:MyTools.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance Type=viewmodel:HomePageViewModel}">
+    <hc:TransitioningContentControl>
+        <DockPanel HorizontalAlignment="Center" LastChildFill="True">
+            <Viewbox DockPanel.Dock="Top" MaxWidth="520">
+                <hc:FlipClock Margin="32"/>
+            </Viewbox>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding YiYan}" FontFamily="楷体" Foreground="#b9b9b9" Style="{StaticResource TextBlockTitle}"/>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding YiYanAuthor}" HorizontalAlignment="Right" FontFamily="楷体" Foreground="#2c3137" Style="{StaticResource TextBlockSubTitle}" Margin="0,20"/>
+            <hc:ScrollViewer IsInertiaEnabled="True" hc:ScrollViewerAttach.AutoHide="True">
+                <hc:UniformSpacingPanel Spacing="10" ChildWrapping="Wrap" HorizontalAlignment="Center">
+                    <Button hc:IconElement.Geometry="{StaticResource MoFishPig}" Command="{Binding OpenImgMiniControl}" CommandParameter="https://dayu.qqsuu.cn/moyuribao/apis.php">摸鱼日报</Button>
+                    <Button hc:IconElement.Geometry="{StaticResource MoFishPig}" Command="{Binding OpenImgMiniControl}" CommandParameter="https://dayu.qqsuu.cn/moyurili/apis.php">摸鱼日历</Button>
+                    <Button hc:IconElement.Geometry="{StaticResource MoFishPig}" Command="{Binding OpenImgMiniControl}" CommandParameter="https://dayu.qqsuu.cn/mingxingbagua/apis.php">摸鱼明星八卦</Button>
+                </hc:UniformSpacingPanel>
+            </hc:ScrollViewer>
+        </DockPanel>
+    </hc:TransitioningContentControl>
+</Border>

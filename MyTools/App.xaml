@@ -1,0 +1,21 @@
+﻿<Application x:Class="MyTools.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MyTools" 
+             xmlns:localConverters="clr-namespace:MyTools.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                <ResourceDictionary Source="ResourceDictionary.xaml"/>
+                <ResourceDictionary Source="GeometryDictionary.xaml"/>
+                <ResourceDictionary Source="ImageDictionary.xaml"/>
+                <ResourceDictionary Source="ConverterDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <localConverters:Str2StaticResource x:Key="Str2StaticResource"/>
+            <localConverters:Bool2String x:Key="Bool2String"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
